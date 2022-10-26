@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctnmixmowbif1"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_t4sa4"]
+[ext_resource type="Script" path="res://Main.cs" id="1_v4ixw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6nqs"]
+size = Vector2(40, 40)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_v4ixw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.27451, 0.27451, 0.27451, 1)
+
+[node name="Control" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="ColorRect/Control"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 52.0
+offset_right = 128.0
+offset_bottom = 83.0
+text = "RPC call"
+
+[node name="Player" type="CharacterBody2D" parent="ColorRect"]
+script = ExtResource("1_t4sa4")
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/Player"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/Player"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_b6nqs")
+
+[node name="Camera2D" type="Camera2D" parent="ColorRect/Player"]
+current = true
