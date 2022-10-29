@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using static Godot.MultiplayerAPI;
 
@@ -26,22 +27,19 @@ public partial class Main : Node2D {
   [RPC(RPCMode.AnyPeer)]
   void NotifyFourParams() {
     GD.Print(++Times);
-    for (var i = 0; i < Repeat; i++) {
-      Rpc(nameof(FourParams), "one", "two", "three", GetGlobalMousePosition());
-    }
+    Rpc(nameof(FourParams), "one", "two", "three", "four");
+    GC.Collect();
   }
 
   [RPC(RPCMode.AnyPeer)]
   void NotifyNoParams() {
     GD.Print(++Times);
-    for (var i = 0; i < Repeat; i++) {
-      Rpc(nameof(NoParams));
-    }
+    Rpc(nameof(NoParams));
   }
 
 
   [RPC(RPCMode.Authority)]
-  void FourParams(string one, string two, string three, Vector2 loc) {
+  void FourParams(string one, string two, string three, string four) {
     // This is never called, just exists for completeness
   }
 
